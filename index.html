@@ -60,29 +60,17 @@
             <div><p style="margin: 0;">Markdown</p>
                 <div><div><div style="background: #bebebe;width: 85%;height: 100%;border-radius: 10px;"
                     class="highlight width"></div></div></div></div>
-            <div><p style="margin: 0;">CSS</p>
-                <div><div><div style="background: #4061e8;width: 78%;height: 100%;border-radius: 10px;"
-                    class="highlight width"></div></div></div></div>
             <div><p style="margin: 0;">Html</p>
                 <div><div><div style="background: #d66022;width: 70%;height: 100%;border-radius: 10px;"
                     class="highlight width"></div></div></div></div>
             <div><p style="margin: 0;">Python</p>
                 <div><div><div style="background: #4db8a6;width: 52%;height: 100%;border-radius: 10px;"
                     class="highlight width"></div></div></div></div>
-            <div><p style="margin: 0;">Javascript</p>
-                <div><div><div style="background: #e9c900;width: 46%;height: 100%;border-radius: 10px;"
-                    class="highlight width"></div></div></div></div>
             <div><p style="margin: 0;">C++</p>
                 <div><div><div style="background: #6c94c9;width: 42%;height: 100%;border-radius: 10px;"
                     class="highlight width"></div></div></div></div>
             <div><p style="margin: 0;">Cmd</p>
                 <div><div><div style="background: #aaaaaa;width: 40%;height: 100%;border-radius: 10px;"
-                    class="highlight width"></div></div></div></div>
-            <div><p style="margin: 0;">C#</p>
-                <div><div><div style="background: #64047f;width: 30%;height: 100%;border-radius: 10px;"
-                    class="highlight width"></div></div></div></div>
-            <div><p style="margin: 0;">Vbs</p>
-                <div><div><div style="background: #a2e0ff;width: 8%;height: 100%;border-radius: 10px;"
                     class="highlight width"></div></div></div></div>
             <div><p style="margin: 0;">Powershell</p>
                 <div><div><div style="background: #3e6dbf;width: 7%;height: 100%;border-radius: 10px;"
@@ -100,8 +88,6 @@
     </div>
     <div class="box card fx h stop-center" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
         <p class="tit">我的项目<span class="eng">My projects...</span></p>
-        <div class="body">
-            <p>往下滑...<span class="eng">Scroll down...</span></p>
         </div>
     </div>
     <div class="box text center" style="margin-top: var(--ph);">
@@ -129,63 +115,6 @@
     <div class="box text center lock" style="margin-top: var(--ph);">
         <h1 style="font-size: 90px;"><span  style="color: #fff;">没别的了</span><span class="eng">That's all</span></h1>
     </div>
-    <!-- 预加载 -->
-    <img src="win12.svg" style="width: 0;height: 0;opacity: 0;border: 0;margin: 0;">
-    <img src="nikov.svg" style="width: 0;height: 0;opacity: 0;border: 0;margin: 0;">
-    <script src="/tapple/scroll.js"></script>
-    <script>
-        my_scroll=(t)=>{
-            if(t==0){
-                $('#title>.xing').css('transform',`translateY(100px)`);
-                $('#title>.xing').css('opacity',`0`);
-                $('#title>.yuan').css('transform',`translateY(100px)`);
-                $('#title>.yuan').css('opacity',`0`);
-                $('#title>.text').css('transform',`translateY(50px)`);
-                $('#title>.text').css('opacity',`0`);
-            }else if(0<t && t<100){
-                $('#title>.xing').css('transform',`translateY(${(100-t)}px)`);
-                $('#title>.xing').css('opacity',`${(t/100)}`);
-                $('#title>.yuan').css('transform',`translateY(100px)`);
-                $('#title>.yuan').css('opacity',`0`);
-            }else if(t>=100 && t<200){
-                $('#title>.xing').css('transform',`translateY(0)`);
-                $('#title>.xing').css('opacity',`1`);
-                $('#title>.yuan').css('transform',`translateY(${(200-t)}px)`);
-                $('#title>.yuan').css('opacity',`${((t-100)/100)}`);
-                $('#title>.text').css('transform',`translateY(50px)`);
-                $('#title>.text').css('opacity',`0`);
-            }else if(t>=200 && t<300){
-                $('#title>.yuan').css('transform',`translateY(0)`);
-                $('#title>.yuan').css('opacity',`1`);
-                $('#title>.text').css('transform',`translateY(0)`);
-                $('#title>.text').css('opacity',`1`);
-                $('#title').show(200);
-            }else if(t<400){
-                $('#title>.xing').css('transform',`translateY(0)`);
-                $('#title>.xing').css('opacity',`1`);
-                $('#title>.yuan').css('transform',`translateY(0)`);
-                $('#title>.yuan').css('opacity',`1`);
-                $('#title>.text').css('transform',`translateY(0)`);
-                $('#title>.text').css('opacity',`1`);
-                $('#title').show(200);
-            }else{
-                $('#title').hide(200);
-            }
-            const box_win12 = $('#win12')[0];
-            if(t<box_win12.offsetTop+box_win12.offsetHeight&&box_win12.offsetTop-ph<t){
-                if(!$('body').hasClass('win12')) $('body').addClass('win12');
-            }else{
-                $('body').removeClass('win12');
-            }
-            const box_nikov = $('#nikov')[0];
-            if(t<box_nikov.offsetTop+box_nikov.offsetHeight&&box_nikov.offsetTop-ph<t){
-                if(!$('body').hasClass('nikov')) $('body').addClass('nikov');
-            }else{
-                $('body').removeClass('nikov');
-            }
-        }
-    </script>
-    <!-- <img src="https://bing.com/th?id=OHR.Trossachs_ZH-CN9299955040_UHD.jpg&qlt=100" alt=""> -->
 </body>
 
 </html>
