@@ -1,5 +1,101 @@
-<p>Hello 大家好</p>
-<p>我是LeoY2020，这是我的个人网站。 </p>
-<p>欢迎筑巢！</p>
-<p><font face="楷体" size=10>以下是我的项目：</font></p>
-<a href="https://leoy2020.github.io/randspot.html">randspot</a>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeoY的个人主页</title></title>
+    <link rel="stylesheet" href="/tapple/main.css">
+    <link rel="stylesheet" href="style.css">
+    <base target="_blank">
+</head>
+<body><div id="loadback" style="background-color:#000;width:100%;height:100%;z-index:105;position:fixed;transition:5s;top:0;left:0;color: #d2d2d2;">
+    <p id="loadbacktext" style="width:100%;position:absolute;left:0;font-size:50px;transition:1s;height:100px;top:calc(50% - 80px);text-align:center;opacity:0;margin:0;">
+        嗨,我是LeoY</p>
+    <p id="loadbacktexteng" style="width:100%;position:absolute;left:0;font-size:25px;transition:1s;height:50px;top:50%;text-align:center;opacity:0;margin:0;">
+        Hi,terribly nice to meet you!</p>
+    <script>setTimeout(()=>{document.getElementById('loadbacktext').style.opacity=1;document.getElementById('loadbacktexteng').style.opacity = 1;},100);
+        setTimeout(()=>{document.getElementById('loadbacktext').style.opacity=0;document.getElementById('loadbacktexteng').style.opacity = 0;},2100);
+        setTimeout(()=>{document.getElementById('loadbacktext').innerText = '与君初相识，犹如故人归。欢迎来到LeoY的个人主页';
+        document.getElementById('loadbacktexteng').innerText='Meeting you first time is like seeing an old friend.Welcome to Starry Source\'s website.'
+        document.getElementById('loadbacktext').style.opacity = 1;document.getElementById('loadbacktexteng').style.opacity=1;},4100);
+        let zh_ms=['海内存知己,天涯若比邻,正在加载请稍等...','有朋自远方来,不亦乐乎,欢迎!','君问归期未有期,巴山夜雨涨秋池,请耐心等待',
+        '无可奈何花落去,似曾相识燕归来,页面马上加载出来',
+        // '十年生死两茫茫,等待总是有结果的,请耐心',
+        '盈缩之期,不但在天;养怡之福,可得永年。正在努力加载','遗民泪尽胡尘里,南望王师又一年,你的网络太慢了',
+        '让我们再来一次吧'];let en_ms=['Wherever you are,friendship never chenge.Page is loading...','Meeting friends is very happy.Welcome!',
+        'Your returning date hasn\'t decided,rain rises the pond.Please wait','Flowers fall helplessly,the swallow return again,Page coming soon',
+        // 'Ten yaers,the distance between life and death.Please wait patiently',
+        'The length of life is not just decided by god.Loading hard...',
+        'Loyalists crying in Hun\'s territory,year after year.The network is too slow.','Let\'s do it again'];
+        let c=-1;
+        let bcci = setInterval(() => {
+            document.getElementById('loadbacktext').style.opacity=0;document.getElementById('loadbacktexteng').style.opacity =0;
+            setTimeout(() => {c++; document.getElementById('loadbacktext').innerText = zh_ms[c % 7];
+                document.getElementById('loadbacktexteng').innerText = en_ms[c % 7];
+                document.getElementById('loadbacktext').style.opacity=1;document.getElementById('loadbacktexteng').style.opacity = 1;
+            }, 1000);document.getElementById('loadback').style.backgroundColor = '#003561';
+            setTimeout(()=>{document.getElementById('loadback').style.backgroundColor = '#000';}, 5000);
+        }, 10000);
+        document.body.onload=()=>{ document.getElementById('loadback').style.opacity=0;setTimeout(()=>{document.getElementById('loadback').style.display='none';},3000); clearInterval(bcci)};</script>
+    </div>
+    <script src="/tapple/jq.min.js"></script>
+    <p style="width: 100px;left: calc(50% - 50px);position: absolute;top: 0;text-align: center;">往下滑...<span class="eng">Scroll down...</span></p>
+    <div class="box card fx h func" style="--speed:5;width: 50%;margin-left: 25%;margin-top: calc(var(--ph) * 2);">
+        <p class="tit">你好!👋<span class="eng">Hello!👋</span></p>
+        <div class="body">
+            <p>很高兴认识你！😀<span class="eng">Glad to meet you!😀</span></p>
+            <p>我是LeoY<span class="eng">Yes, I'm LeoY</span></p>
+        </div>
+    </div>
+    <div class="box card" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);position: relative;">
+        <p class="tit">自我介绍一下<span class="eng">Let me introduce myself</span></p>
+        <div class="body">
+            <p>LeoY (真实姓名: 闫穼雯)<span class="eng">LeoY (True Name: Yan Shenwen)</span></p>
+            <p>国籍: 中国<a class="detail" </a>
+                <span class="eng">Nationalities: China</span></p>
+            <p>生日: 2013/10/03<span class="eng">Birthday: Oct 03,2013</span></p>
+            <p>年龄: 自己算<span class="eng">Age: calculate yourself</span></p>
+        </div>
+    </div>
+    <div class="box card" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);position: relative;">
+        <p class="tit">在读学校<span class="eng">Experiences and achievements</span></p>
+        <div class="body">
+            <p>2020年就读于北京市海淀区中关村第一小学<span class="eng">Studied in Beijing Zhongguancun No.1 Primary School in 2020.</span></p>
+        </div>
+    </div>
+    <div class="box card fx h func" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
+        <p class="tit">擅长...<span class="eng">Be talented in...</span></p>
+        <div class="body">
+            <p>给Windows搞事情<span class="eng">Installing many kinds of systems happily</span></p>
+            <p>做软件<span class="eng">Changing all kinds apps to preview/beta version</span></p>
+            <p>剪视频<span class="eng">Editing videos</span></p>
+            <s>做网站<span class="eng">Singing🎤, dancing💃, rapping😲 and palying basketball🏀</span></s>
+        </div>
+    </div>
+    <div class="box card fx h stop-center" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
+        <p class="tit">我的项目<span class="eng">My projects...</span></p>
+        <div class="body">
+            <p>往下滑...<span class="eng">Scroll down...</span></p>
+        </div>
+    </div>
+    <div class="box text center" style="margin-top: var(--ph);">
+        <h1 class="trans b-s" style="font-size: 90px;"><span class="shine" style="--color:#7422ae;--colorshine:#487fff;--speed:2;">Windows 12 网页版</span><span class="eng">Windows 12 Online</span></h1>
+    </div>
+    <div class="box card pjc defc" style="width: 50%;margin-left: 25%;margin-top: var(--ph);" id="win12">
+        <p class="tit">randspot<span class="eng">Windows 12 Online</span></p>
+        <div class="body">
+            <p>使用GNU c++制作，用cmd的显示方式解决排座位的烦恼<span class="eng">Made by GNU C++, create spot random system and show it on cmd</span></p>
+            <p>独特的UI设计是项目的特色<span class="eng">Silky animation and beautiful UI design are the feature of this project</span></p>
+            <div style="display: flex;" class="tool">
+                <a href="http://leoy2020.github.io/randspot.html">
+                    <p>前往下载</p>
+                    <span class="eng">Go to try</span>
+                </a>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
