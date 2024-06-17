@@ -1,0 +1,15 @@
+<input type="file" id="files" >
+<script>
+    var elem = document.getElementById('files'),
+        img = document.getElementById('preview');
+    elem.onchange = function () {
+        var files = elem.files,
+            reader = new FileReader();
+        if(files && files[0]){
+            reader.onload = function (ev) {
+                img.src = ev.target.result;
+            }
+            reader.readAsDataURL(files[0]);
+        }
+    }
+</script>
