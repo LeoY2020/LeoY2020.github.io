@@ -56,8 +56,45 @@
         }, 10000);
         document.body.onload=()=>{ document.getElementById('loadback').style.opacity=0;setTimeout(()=>{document.getElementById('loadback').style.display='none';},3000); clearInterval(bcci)};</script>
     </div>
+	<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            /* 本例12个文字(加标点符号)；有多少个文字，width就是多少个em */
+            width: 12em;
+            /* 加上两个动画，一个是打字动画，使用steps让字一个一个的出现，
+             注意step和字数保持一致，光标动画也是同理，*/
+            animation: typingWords 5s steps(12) infinite, cursor 0.5s steps(1) infinite;
+            /* 要设置不允许换行，且溢出隐藏 */
+            white-space: nowrap;
+            overflow: hidden;
+            /* 使用右边框作为打印的指针光标 */
+            border-right: 1px solid #000;
+        }
+
+        @keyframes typingWords {
+            0% {
+                width: 0;
+            }
+        }
+
+        @keyframes cursor {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <q>欢迎光临呐，各位访客们。<q>
+</body>
+
 	<p>大家好，我叫LeoY(网名)，做个自我介绍吧-</p>
-	<p>我现在四年级</p>
+	<p>我现在五年级</p>
     <script src="/tapple/jq.min.js"></script>
         <p class="tit"><span>会写各种编程语言，包括：</span></p>
             <p>Scratch</p>
@@ -81,8 +118,6 @@
         <p class="tit">我的项目</p>
         </div>
     </div>
-    <div class="box text center" style="margin-top: var(--ph);">
-        <p><font color=green size=15 face="NeverMind-Regular">randspot</font></p>
     </div>
     <style>
         .box {
@@ -114,7 +149,7 @@
 
 <body>
     <div class="box">
-        <h1>srand</h1>
+        <h1>randspot</h1>
     </div>
     <!-- 
         思路：
@@ -140,7 +175,7 @@
     </div>
         <div class="body">
             <p>各路游戏赶来中。。。</p>
-                    <a herf="https://leoy2020.github.io/Games">点我立刻开玩！</a>
+                    <q herf="https://leoy2020.github.io/Games">点我立刻开玩！</a>
         </div>
     </div>
     <div class="box card fx h func" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
