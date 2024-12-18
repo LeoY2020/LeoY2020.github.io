@@ -182,7 +182,7 @@
             margin: 8px;
             width: 120px;
             height: 48px;
-            background-color: #afa;
+            background-color: #faa;
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -222,7 +222,7 @@
         .ripple {
             position: absolute;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 1);
+            background-color: rgba(255, 255, 255, 0.48);
             transform: scale(0);
             animation: ripple 240ms linear;
         }
@@ -237,7 +237,7 @@
 </head>
 
 <body>
-    <button class="targetBtn">点我立即开玩！</button>
+    <button class="targetBtn btn5">点我开玩</button>
     <script>
         // 创建波纹函数，只要一点击就创建一个波纹
         function createRipple(event) {
@@ -254,7 +254,9 @@
             if (ripple) {
                 ripple.remove();
             }
-            button.appendChild(circle); // 将这个波纹动画圆作为子元素追加到父元素button上（这样父元素相对定位，子元素绝对定位就生效了）
+            button.appendChild(circle); // 将这个波纹动画圆作为子元素追加到父元素button上（这样父元素相对定位，子元素绝对定位就生
+
+效了）
         }
         // 1. 获取将要点击的按钮dom数组
         const targetBtnArr = document.querySelectorAll('.targetBtn')
@@ -265,6 +267,9 @@
         }
     </script>
 </body>
+
+
+</html>
 
 
 </html>
