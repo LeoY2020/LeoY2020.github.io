@@ -62,28 +62,120 @@
 
 	<p>大家好，我叫LeoY(网名)，做个自我介绍吧-</p>
 	<p>我现在五年级</p>
-    <script src="/tapple/jq.min.js"></script>
-        <p class="tit"><span>会写各种编程语言，包括：</span></p>
-            <p>Scratch</p>
-            <p>Markdown</p>
-            <p>Html</p>
-            <p>Python</p>
-            <p>C++</p>
-            <p>Cmd</p>
-            <p>Powershell</p>
+        <p class="tit">会写各种编程语言，包括：</p>
+            <span>Scratch</span>
+            <span>Markdown</span>
+            <span>Html</span>
+            <span>Python</span>
+            <span>C++</span>
+            <span>Cmd</span>
+            <span>Powershell</span>
     </div>
-    <div class="box card fx h func" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
         <p class="tit">擅长...</p>
-        <div class="body">
-            <p>用各种系统搞事情</p>
-            <p>写应用程序</p>
-            <p>剪视频</p>
-            <p>做网站</p>
-        </div>
-    </div>
-    <div class="box card fx h stop-center" style="--speed:5;width: 50%;margin-left: 25%;margin-top: var(--ph);">
-        <p class="tit">我的项目</p>
-        </div>
+	<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            font-size: 48px;
+            font-weight: 600;
+            animation: rotate 0.3s ease infinite;
+            /* 注意，要开启绝对定位哦 */
+            position: absolute;
+        }
+
+        /* 鼠标悬浮开启动画也可以的
+        span:hover {
+            animation: rotate 0.3s ease infinite;
+        } */
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            20% {
+                transform: rotate(-2deg);
+            }
+
+            60% {
+                transform: rotate(0);
+            }
+
+            80% {
+                transform: rotate(2deg);
+            }
+
+            100% {
+                transform: rotate(0);
+            }
+        }
+
+        span:nth-child(2) {
+            margin-left: 108px;
+        }
+
+        span:nth-child(3) {
+            margin-left: 216px;
+        }
+    </style>
+</head>
+
+<body>
+    <span>用各种系统搞事情</span>
+    <span>写应用程序</span>
+    <span>剪视频</span>
+    <span>做网站</span>
+
+    <style>
+        /* 加上 -webkit- 注意兼容 */
+        liu {
+            background: -webkit-linear-gradient(135deg,
+                    #0eaf6d,
+                    #ff6ac6 25%,
+                    #147b96 50%,
+                    #e6d205 55%,
+                    #2cc4e0 60%,
+                    #8b2ce0 80%,
+                    #ff6384 95%,
+                    #08dfb4);
+            /* 文字颜色填充设置为透明 */
+            -webkit-text-fill-color: transparent;
+            /* 背景裁剪，即让文字使用背景色 */
+            -webkit-background-clip: text;
+            /* 背景图放大一下，看着柔和一些 */
+            -webkit-background-size: 200% 100%;
+            /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+            -webkit-animation: flowCss 12s infinite linear;
+        }
+
+        @-webkit-keyframes flowCss {
+            0% {
+                /* 移动背景位置 */
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -400% 0;
+            }
+        }
+
+        h1:hover {
+            -webkit-animation: flowCss 4s infinite linear;
+        }
+    </style>
+</head>
+
+<body>
+    <liu>我的项目</liu>
+    <!-- 思路就是 文字颜色填充为透明、背景裁剪让文字使用背景色、然后设置一个渐变背景色
+    再放大一下背景，最后通过动画移动背景位置，于是效果就出来了 -->
+</body>
     </div>
     </div>
     <style>
