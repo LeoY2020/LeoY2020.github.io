@@ -42,5 +42,90 @@
     <!-- 思路就是 文字颜色填充为透明、背景裁剪让文字使用背景色、然后设置一个渐变背景色
     再放大一下背景，最后通过动画移动背景位置，于是效果就出来了 -->
 </body>
+   <style>
+        h2 {
+            /* 本例12个文字(加标点符号)；有多少个文字，width就是多少个em */
+            width: 8em;
+            /* 加上两个动画，一个是打字动画，使用steps让字一个一个的出现，
+             注意step和字数保持一致，光标动画也是同理，*/
+            animation: typingWords 5s steps(8), cursor 0.5s steps(1) ;
+            /* 要设置不允许换行，且溢出隐藏 */
+            white-space: nowrap;
+            overflow: hidden;
+            /* 使用右边框作为打印的指针光标 */
+            border-right: 1px solid #000;
+        }
 
+        @keyframes typingWords {
+            0% {
+                width: 0;
+            }
+        }
+
+        @keyframes cursor {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>新的一年，祝大家<br></h2>
+    <!-- css大佬张鑫旭的实现方式：https://www.zhangxinxu.com/wordpress/2019/01/css-typewriter-effect/ -->
+</body> 
+<style>
+        span {
+            font-size: 48px;
+            font-weight: 600;
+            animation: rotate 0.3s ease infinite;
+            /* 注意，要开启绝对定位哦 */
+            position: absolute;
+        }
+
+        /* 鼠标悬浮开启动画也可以的
+        span:hover {
+            animation: rotate 0.3s ease infinite;
+        } */
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            20% {
+                transform: rotate(-2deg);
+            }
+
+            60% {
+                transform: rotate(0);
+            }
+
+            80% {
+                transform: rotate(2deg);
+            }
+
+            100% {
+                transform: rotate(0);
+            }
+        }
+
+        span:nth-child(2) {
+            margin-left: 108px;
+        }
+
+        span:nth-child(3) {
+            margin-left: 216px;
+        }
+    </style>
+</head>
+
+<body>
+    <span>万事大吉<br></span>
+    <span>心想事成<br></span>
+    <span>福如东海<br></span>
+    <span>寿比南山<br></span>
+    <span>年年有余<br></span>
+    <span>天天开心</span>
+</body>
 </html>
