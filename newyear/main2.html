@@ -10,7 +10,8 @@
         h1 {
             background: -webkit-linear-gradient(135deg,
                     #fe0000,
-                    #00fe00);
+                    #fefe00
+                    #fe0000);
             /* 文字颜色填充设置为透明 */
             -webkit-text-fill-color: transparent;
             /* 背景裁剪，即让文字使用背景色 */
@@ -74,59 +75,54 @@
 <body>
     <h2>新的一年，祝大家<br></h2>
     <!-- css大佬张鑫旭的实现方式：https://www.zhangxinxu.com/wordpress/2019/01/css-typewriter-effect/ -->
-</body> 
 <style>
-        span {
-            font-size: 48px;
-            font-weight: 600;
-            animation: rotate 0.3s ease infinite;
-            /* 注意，要开启绝对定位哦 */
-            position: absolute;
+        h1 {
+            width: 80px;
+            color: cornflowerblue;
         }
 
-        /* 鼠标悬浮开启动画也可以的
-        span:hover {
-            animation: rotate 0.3s ease infinite;
-        } */
+        h1:hover {
+            animation: animate 0.5s linear infinite;
+        }
 
-        @keyframes rotate {
-            0% {
-                transform: rotate(0);
+        @keyframes animate {
+
+            0%,
+            25% {
+                text-shadow: 2px 2px 2px #ff6384;
             }
 
-            20% {
-                transform: rotate(-2deg);
+            50% {
+                text-shadow: 2px -2px 2px #ff6384;
             }
 
-            60% {
-                transform: rotate(0);
-            }
-
-            80% {
-                transform: rotate(2deg);
+            75% {
+                text-shadow: -2px 2px 2px #ff6384;
             }
 
             100% {
-                transform: rotate(0);
+                text-shadow: -2px -2px 2px #ff6384;
             }
-        }
-
-        span:nth-child(2) {
-            margin-left: 108px;
-        }
-
-        span:nth-child(3) {
-            margin-left: 216px;
         }
     </style>
 </head>
 
 <body>
-    <span>万事大吉<br></span>
-    <span>心想事成<br></span>
-    <span>福如东海<br></span>
-    <span>寿比南山<br></span>
-    <span>年年有余<br></span>
-    <span>天天开心</span>
+    <h1>hello</h1>
+    <!-- 
+        一说到阴影，我们常常就会想到盒子的阴影，box-shadow。实际上css3另外提供了文字阴影text-shadow
+        text-shadow对应属性 text-shadow: h-shadow v-shadow blur color;
+                                         水平阴影 垂直阴影 模糊范围 颜色值
+        本例中，当鼠标悬浮的时候，给文字加上动画。四个方向依次都出现文字阴影，就类似跳动的效果了
+    -->
+</body>
+
+<body>
+    <h1>万事大吉<br></h1>
+    <h1>心想事成<br></h1>
+    <h1>福如东海<br></h1>
+    <h1>寿比南山<br></h1>
+    <h1>年年有余<br></h1>
+    <h1>天天开心</h1>
 </body>
 </html>
