@@ -1,16 +1,63 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>开学倒计时</title>
+  <style>
+    .countdown {
+      font-size: 36px;
+      text-align: center;
+      animation: countdown-animation 1s infinite;
+    }
+
+    @keyframes countdown-animation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+        /* 加上 -webkit- 注意兼容 */
+        h1 {
+            background: -webkit-linear-gradient(135deg,
+                    #CC0000,
+                    #CC9D00,);
+            /* 文字颜色填充设置为透明 */
+            -webkit-text-fill-color: transparent;
+            /* 背景裁剪，即让文字使用背景色 */
+            -webkit-background-clip: text;
+            /* 背景图放大一下，看着柔和一些 */
+            -webkit-background-size: 200% 100%;
+            /* 应用动画flowCss 12秒速度 无限循环 线性匀速动画*/
+            -webkit-animation: flowCss 12s infinite linear;
+        }
+
+        @-webkit-keyframes flowCss {
+            0% {
+                /* 移动背景位置 */
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -400% 0;
+            }
+        }
+
+        h1:hover {
+            -webkit-animation: flowCss 4s infinite linear;
+        }
+    </style>
 </head>
 <body>
   <h1>距离开学还有：</h1>
-  <div id="countdown"></div>
+  <div class="countdown">10</div>
 
   <script>
     // 目标日期
-    var targetDate = new Date("2025-02-17T08:00:00");
+    var targetDate = new Date("2025-02-17T08 00:00");
 
     // 更新倒计时
     function updateCountdown() {
@@ -24,7 +71,7 @@
       var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
       // 更新页面上的倒计时显示
-      document.getElementById("countdown").innerHTML = days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒";
+      document.querySelector(".countdown").textContent = days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒";
 
       // 每秒钟更新一次倒计时
       setTimeout(updateCountdown, 1000);
