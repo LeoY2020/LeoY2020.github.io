@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流体汉字 | Flux Hanzi (笔顺虚影对比版)</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <script src="https://unpkg.com/pinyin-pro"></script>
+
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+
+        body {
+            background-color: #000;
+            color: var(--text-primary);
+            font-family: "Noto Sans SC", sans-serif;
+            overflow: hidden; 
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #main-wrapper {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 140px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #fx-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+        }
+
+        #initial-search-ui {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            width: 360px; height: 64px;
+            border-radius: 32px;
+            display: flex; align-items: center; padding: 0 8px 0 24px;
+        }
+
+        #search-input {
+            background: transparent; border: none; color: white;
+            font-size: 20px; width: 100%; outline: none;
+        }
+
+        #search-btn {
+            background: white; color: black; border: none;
+            border-radius: 28px; padding: 10px 24px;
+            font-weight: bold; cursor: pointer;
+        }
+
+        #result-stage {
+            position: relative; z-index: 10;
+            width: 100%; max-width: 800px;
+            display: none; flex-direction: column; align-items: center;
+            padding-top: 60px; opacity: 0;
+        }
+
+        #character-target {
+            width: 240px; height: 240px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='0' x2='100%25' y2='100%25' stroke='rgba(255,255,255,0.05)'/%3E%3Cline x1='100%25' y1='0' x2='0' y2='100%25' stroke='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+            background-size: contain;
+            margin-bottom: 20px;
+        }
+
+        #info-panel {
+            margin: 20px; width: calc(100% - 40px);
+            max-width: 500px; padding: 30px; border-radius: 24px;
+        }
+
+        .pinyin-label { font-size: 42px; font-weight: 200; margin-bottom: 10px; }
+        .meaning-content { font-size: 14px; color: var(--text-secondary); line-height: 1.6; white-space: pre-line; }
+
+        #step-gallery {
+            width: 100%; padding: 20px;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 15px; margin-top: 20px;
+        }
+
+        .step-item {
+            width: 70px; height: 70px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .step-item svg { width: 100% !important; height: 100% !important; }
+
+        #search-fab {
+            position: fixed; bottom: 40px; right: 40px;
+            width: 56px; height: 56px; border-radius: 50%;
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2); opacity: 0;
+        }
+
+        #bottom-search-bar {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%); width: 380px; height: 56px;
+            border-radius: 28px; z-index: 101; display: none;
+            align-items: center; padding: 0 8px 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="fx-canvas"></canvas>
+
+    <div id="main-wrapper">
+        <div id="initial-search-ui" class="glass-panel">
+            <input type="text" id="search-input" placeholder="输入汉字..." maxlength="1">
+            <button id="search-btn">查询</button>
+        </div>
+
+        <div id="result-stage">
+            <div id="character-target"></div>
+            
+            <div id="info-panel" class="glass-panel">
+                <div class="pinyin-label" id="res-pinyin">--</div>
+                <div class="meaning-content" id="res-def">正在解析中...</div>
+            </div>
+
+            <div style="font-size: 10px; color: #555; margin-top: 40px; letter-spacing: 3px; font-weight: bold;">STROKE BY STROKE / 笔顺分解</div>
+            <div id="step-gallery"></div>
+        </div>
+    </div>
+
+    <div id="search-fab">
+        <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </div>
+
+    <div id="bottom-search-bar" class="glass-panel">
+        <input type="text" id="bottom-input" placeholder="输入下一个字..." maxlength="1" style="background:transparent; border:none; color:white; width:100%; outline:none;">
+        <button id="bottom-search-btn" style="background:white; color:black; border:none; border-radius:20px; padding:8px 20px; font-weight:bold;">查询</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fx-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars = [];
+        let activeWriter = null;
+        let animTimer = null;
+
+        function resize() {
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
+            stars = Array.from({length: 150}, () => ({
+                x: Math.random() * width, y: Math.random() * height,
+                s: Math.random() * 1.5, a: Math.random(), v: 0.005 + Math.random() * 0.01
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,width,height);
+            stars.forEach(s => {
+                s.a += s.v; if(s.a>1 || s.a<0) s.v *= -1;
+                ctx.fillStyle = `rgba(255,255,255,${Math.max(0, s.a * 0.4)})`;
+                ctx.beginPath(); ctx.arc(s.x, s.y, s.s, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        async function runSearch(inputEl, containerEl) {
+            const char = inputEl.value.trim();
+            if (!char || !/[\u4e00-\u9fa5]/.test(char)) return;
+
+            if (animTimer) clearTimeout(animTimer);
+            activeWriter = null;
+
+            gsap.to(containerEl, { opacity: 0, scale: 0.9, duration: 0.3, onComplete: () => containerEl.style.display = 'none' });
+            
+            const py = pinyinPro.pinyin(char, { toneType: 'symbol' });
+            const data = await HanziWriter.loadCharacterData(char).catch(() => null);
+
+            render(char, py, data);
+        }
+
+        function render(char, py, data) {
+            document.getElementById('res-pinyin').innerText = py;
+            document.getElementById('res-def').innerText = "【解析】该汉字承载着深厚的文化积淀。通过下方笔顺分解，可以清晰观察到其由浅入深的结构逻辑：高亮笔画为当前进度，虚影则展现了汉字的整体气韵。";
+
+            const stage = document.getElementById('result-stage');
+            stage.style.display = 'flex';
+            gsap.to(stage, { opacity: 1, duration: 0.5 });
+            gsap.to('#search-fab', { opacity: 1, duration: 0.5 });
+
+            const target = document.getElementById('character-target');
+            target.innerHTML = '';
+            
+            const mainWriter = HanziWriter.create(target, char, {
+                width: 240, height: 240, padding: 10,
+                strokeColor: '#fff', outlineColor: 'rgba(255,255,255,0.1)',
+                strokeAnimationSpeed: 1.5, delayBetweenStrokes: 200
+            });
+            activeWriter = mainWriter;
+
+            const animate = () => {
+                if(mainWriter !== activeWriter) return;
+                mainWriter.animateCharacter({ onComplete: () => {
+                    animTimer = setTimeout(() => {
+                        if(mainWriter === activeWriter) {
+                            mainWriter.hideCharacter();
+                            animate();
+                        }
+                    }, 3000);
+                }});
+            };
+            animate();
+
+            // 笔顺分解：高亮 vs 虚影
+            const gallery = document.getElementById('step-gallery');
+            gallery.innerHTML = '';
+            if (data && data.strokes) {
+                data.strokes.forEach((_, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'step-item';
+                    gallery.appendChild(item);
+
+                    // 创建局部 Writer 实例
+                    const sw = HanziWriter.create(item, char, {
+                        width: 70, height: 70, padding: 5,
+                        strokeColor: '#ffffff', // 已写笔画颜色
+                        outlineColor: 'rgba(255, 255, 255, 0.15)', // 未写笔画（虚影）颜色
+                        showOutline: true // 必须开启轮廓显示
+                    });
+
+                    // 准备索引数组 [0, 1, ..., index]
+                    const strokeIndices = Array.from({length: index + 1}, (_, i) => i);
+                    
+                    // 核心显示逻辑：
+                    // hideCharacter 会清除所有“已写”效果，露出全字的虚影(outline)
+                    // showCharacter({strokesShown: indices}) 会把指定的笔画渲染为 strokeColor
+                    sw.hideCharacter(); 
+                    sw.showCharacter({
+                        strokesShown: strokeIndices
+                    });
+                });
+            }
+        }
+
+        window.onload = () => { resize(); draw(); };
+        window.onresize = resize;
+        document.getElementById('search-btn').onclick = () => runSearch(document.getElementById('search-input'), document.getElementById('initial-search-ui'));
+        document.getElementById('bottom-search-btn').onclick = () => runSearch(document.getElementById('bottom-input'), document.getElementById('bottom-search-bar'));
+        document.getElementById('search-fab').onclick = () => {
+            const bar = document.getElementById('bottom-search-bar');
+            bar.style.display = 'flex';
+            gsap.fromTo(bar, { opacity: 0, y: 20 }, { opacity: 1, y: 0 });
+            document.getElementById('bottom-input').focus();
+        };
+    </script>
+</body>
+</html>
